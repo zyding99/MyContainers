@@ -136,9 +136,9 @@ public:
 	}
 	~Deque() {
 		for (size_t i = 0; i < map_size; ++i) {
-			delete map[i];
+			delete[] map[i];
 		}
-		delete map;
+		delete[] map;
 	}
 
 	map_pointer getMap() { return map; }
@@ -190,7 +190,7 @@ protected:
 		for (size_t i = new_start + map_size; i < new_size; ++i) {
 			new_map[i] = new T[buffer_size];
 		}
-		delete map;
+		delete[] map;
 		map = new_map;
 		start.node = &map[new_start];
 		finish.node = &map[new_start + old_size - 1];
@@ -219,7 +219,7 @@ protected:
 		for (size_t i = new_start + map_size; i < new_size; ++i) {
 			new_map[i] = new T[buffer_size];
 		}
-		delete map;
+		delete[] map;
 		map = new_map;
 		start.node = &map[new_start];
 		finish.node = &map[new_start + finish_offset];
