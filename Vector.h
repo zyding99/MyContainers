@@ -26,7 +26,7 @@ public:
 
 	Vector(const Vector<T>& v) {
 		if (initialized) {
-			delete start;
+			delete[] start;
 		}
 		if (v.size() != 0) {
 			size_t sz = v.size();
@@ -39,7 +39,7 @@ public:
 	}
 
 	~Vector() {
-		delete start;
+		delete[] start;
 		// end_of_storage = finish = nullptr;
 	}
 
@@ -57,7 +57,7 @@ protected:
 		size_t new_size = old_size == 0 ? 2 * old_size : 1;
 		Iterator new_start = new T[new_size];
 		memcpy(new_start, start, old_size * sizeof(T));
-		delete start;
+		delete[] start;
 		start = new_start;
 		finish = new_start + old_size;
 		end_of_storage = new_start + new_size;
@@ -92,7 +92,7 @@ public:
 		size_t old_size = size();
 		Iterator new_start = new T[sz];
 		memcpy(new_start, start, old_size * sizeof(T));
-		delete start;
+		delete[] start;
 		start = new_start;
 		finish = new_start + old_size;
 		end_of_storage = new_start + sz;
